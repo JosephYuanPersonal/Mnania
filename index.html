@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mnania Desktop</title>
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.css">
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="dist/mnania.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.js"></script>
+    <script src="https://unpkg.com/rx-fs/dist/rx-fs.min.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            if (typeof Mnania === 'undefined') {
+                console.error('Mnania 未能正确加载，Mnania =', Mnania);
+                return;
+            }
+            
+            try {
+                console.log('Mnania loaded:', Mnania);
+                Mnania.start(document.body);
+                
+                const testWindow = new Mnania.Window({
+                    title: '测试窗口',
+                    content: '这是一个可拖动和调整大小的窗口'
+                });
+                
+                const terminal = new Mnania.TerminalWindow({
+                    title: '终端'
+                });
+                
+                document.body.appendChild(testWindow.element[0]);
+                document.body.appendChild(terminal.element[0]);
+            } catch (e) {
+                console.error('Error:', e);
+            }
+        });
+    </script>
+</body>
+</html> 
